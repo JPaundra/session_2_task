@@ -23,3 +23,8 @@ mpg5<- mpg4 %>% spread(year, max_vol_per_cyl)
 # Task 10
 
 mpg6<-mpg5 %>% mutate(change = `2008` - `1999`)
+
+# Task 11
+mpg6 %>% 
+  rename(max_vpc_1999=`1999`, max_vpc_2008 = `2008`) %>% 
+  gather(variable, value,max_vpc_1999,max_vpc_2008, change) %>% View
