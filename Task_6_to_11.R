@@ -17,3 +17,5 @@ mpg3 %>% filter(manufacturer == "chevrolet") %>% arrange(desc(vol_per_cyl))
 
 mpg4<- mpg3 %>% group_by(manufacturer, year) %>% summarise(vol_per_cyl =max(vol_per_cyl)) %>% rename(max_vol_per_cyl =vol_per_cyl)
 
+# Task 9
+mpg5<- mpg4 %>% spread(year, max_vol_per_cyl)
