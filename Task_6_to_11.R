@@ -19,3 +19,7 @@ mpg4<- mpg3 %>% group_by(manufacturer, year) %>% summarise(vol_per_cyl =max(vol_
 
 # Task 9
 mpg5<- mpg4 %>% spread(year, max_vol_per_cyl)
+
+# Task 10
+
+mpg6<-mpg5 %>% mutate(change = `2008` - `1999`)
