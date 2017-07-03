@@ -33,5 +33,10 @@ good_weather_delays<- inner_join(flights2, weather2) %>%
 
 good_weather_delays %>% 
   group_by(carrier) %>% 
-  summarise(dep_delay=mean(dep_delay, na.rm=TRUE))
+  summarise(dep_delay=mean(dep_delay, na.rm=TRUE)) %>%
+  arrange(dep_delay) %>%
+  inner_join(airlines)
 
+
+
+# Task 14
