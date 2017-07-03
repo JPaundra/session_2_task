@@ -31,7 +31,7 @@ good_weather_delays<- inner_join(flights2, weather2) %>%
          wind_speed == min(wind_speed, na.rm = TRUE), 
          visib == max(visib, na.rm = TRUE))
 
-good_weather_delays %>% 
+avg_good_weather_delays <-good_weather_delays %>% 
   group_by(carrier) %>% 
   summarise(dep_delay=mean(dep_delay, na.rm=TRUE)) %>%
   arrange(dep_delay) %>%
@@ -40,3 +40,12 @@ good_weather_delays %>%
 
 
 # Task 14
+
+ranked_airline_labels <- avg_good_weather_delays %>% transmute(carrier, 
+                             name = factor(-row_number(), labels = name))
+
+data_task_14 <- good_weather_delays %>% inner_join(ranked_airline_labels)
+
+ggplot(data=data_task_14, aes(x= name,y=dep_delay))+ stat_summary()+
+  coord_flip()+labs(title="Departure delay under ideal weather conditions NYC Airport, 2013",
+                    x="name of carrier",y="average departure delay")
